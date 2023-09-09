@@ -23,6 +23,7 @@ private:
   bool resetTime;  // Flag to reset time
   int cycleCount;  // Cycle count
   int resetButtonPin;  // Reset button pin
+  bool hitDetected  ;
 
 };
 
