@@ -6,7 +6,8 @@ int flag=0;
 const int analogPin = A0;  // Analog input pin
 const int resetButtonPin = 10;  // Reset button pin
 const float knownResistor = 10000.0;  // Known resistor value
-float defaultSensitivity = 39.0;  // Default hit sensitivity
+float defaultSensitivity = 50.0;  // Default hit sensitivity
+bool hitDetected = false ;
 
 
 int reset_btn=0;
