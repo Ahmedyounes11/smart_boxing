@@ -12,7 +12,7 @@ HitDetector::HitDetector(int analogPin, float knownResistor, float defaultSensit
     startTime(0),
     resetTime(false),
     cycleCount(0),
-    resetButtonPin(resetButtonPin) {
+    resetButtonPin(resetButtonPin){
 }
 
 
@@ -39,13 +39,16 @@ int HitDetector::getHitsPerMinute() {
  
   int ret=1;
   unsigned long currentTime = millis();  // Get current time
-  if (abs(resistance - previousResistance) >= sensitivity )//&& currentTime - previousTime <= 100) 
+ //if (abs(resistance - previousResistance) >= sensitivity )//&& currentTime - previousTime <= 100) 
+  if(reading>680 && !hitDetected)
   {
     // Check if resistance has changed significantly within hit sensitivity threshold
     Serial.print("Hit;");
     hitCount++;  // Increment hit count
-  } else {
+    hitDetected = true ;
+  } else if(reading<=680)  {
     Serial.print("N/A;");
+    hitDetected = false ;
   }
 
   previousResistance = resistance;  // Update previous resistance
@@ -54,7 +57,7 @@ int HitDetector::getHitsPerMinute() {
   unsigned long elapsedTime = (currentTime + 1) - startTime;  // Calculate elapsed time
   int hitRate = hitCount / (elapsedTime / 60000.0);  // Calculate hit rate in hits per minute
   Serial.print(hitCount);
-  //Serial.print(resistance);
+  //Serial.print(reading);
   Serial.print(";");
   
   Serial.print(elapsedTime / 1000.0);
